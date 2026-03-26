@@ -1,7 +1,7 @@
 {
   "name": "graph-edge-notes",
-  "version": "0.3.0",
-  "description": "Editable edge annotations for the Obsidian graph view.",
+  "version": "0.3.1",
+  "description": "Editable edge annotations for the graph view.",
   "scripts": {
     "dev": "node esbuild.config.mjs",
     "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
