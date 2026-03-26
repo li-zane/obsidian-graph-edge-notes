@@ -1,0 +1,18 @@
+node_modules/
+*.tsbuildinfo
+
+# Obsidian plugin release artifacts
+releases/
+
+# Local development and scratch files
+app.js
+installed-data.snapshot.json
+SYNC_NOTE.md
+task_plan.md
+findings.md
+progress.md
+*.png
+
+# OS/editor files
+.DS_Store
+Thumbs.db

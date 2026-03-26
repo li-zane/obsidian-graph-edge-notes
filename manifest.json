@@ -1,0 +1,9 @@
+{
+  "id": "graph-edge-notes",
+  "name": "Graph Edge Notes",
+  "version": "0.3.0",
+  "minAppVersion": "1.5.0",
+  "description": "Display and edit short relationship labels on Obsidian graph edges.",
+  "author": "zane",
+  "isDesktopOnly": false
+}

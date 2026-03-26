@@ -1,0 +1,109 @@
+.graph-edge-notes-tooltip {
+  position: fixed;
+  z-index: 9999;
+  max-width: min(280px, calc(100vw - 32px));
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--background-modifier-border);
+  background: color-mix(in srgb, var(--background-primary) 92%, black 8%);
+  color: var(--text-normal);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.22);
+  font-size: 12px;
+  line-height: 1.5;
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: pre-wrap;
+  backdrop-filter: blur(12px);
+}
+
+.graph-edge-notes-tooltip.is-hidden {
+  display: none;
+}
+
+.graph-edge-notes-label-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.graph-edge-notes-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 999px;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  filter: drop-shadow(0 0 1px rgba(17, 24, 39, 0.95)) drop-shadow(0 0 3px rgba(17, 24, 39, 0.85));
+}
+
+.graph-edge-notes-label.is-hidden {
+  display: none;
+}
+
+.graph-edge-notes-textarea {
+  width: 100%;
+  min-height: 90px;
+  resize: vertical;
+}
+
+.graph-edge-notes-modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.graph-edge-notes-help {
+  margin: 0 0 16px;
+  color: var(--text-muted);
+}
+
+.graph-edge-notes-debug-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9998;
+  width: 360px;
+  max-height: 280px;
+  overflow: hidden;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-primary);
+  color: var(--text-normal);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+.graph-edge-notes-debug-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--background-modifier-border);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.graph-edge-notes-debug-log {
+  padding: 8px 12px 12px;
+  max-height: 220px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.graph-edge-notes-debug-log > div {
+  margin-top: 6px;
+}
+
+.graph-edge-notes-debug-log > div:first-child {
+  margin-top: 0;
+}
