@@ -51,6 +51,14 @@
   display: none;
 }
 
+.graph-edge-notes-label.is-detached {
+  display: none;
+}
+
+.graph-edge-notes-controls.is-hidden {
+  display: none;
+}
+
 .graph-edge-notes-textarea {
   width: 100%;
   min-height: 90px;

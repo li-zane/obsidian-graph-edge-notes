@@ -296,7 +296,7 @@ export class GraphOverlayController {
     this.labels.forEach((label) => {
       const liveLink = linkMap.get(this.makeEdgeKey(label.link.source.id, label.link.target.id));
       if (!liveLink) {
-        label.labelEl.style.display = "none";
+        label.labelEl.toggleClass("is-detached", true);
         if (this.activeHoveredLabelId === label.id) {
           this.activeHoveredLabelId = null;
         }
@@ -306,7 +306,7 @@ export class GraphOverlayController {
       }
 
       label.link = liveLink;
-      label.labelEl.style.display = "";
+      label.labelEl.toggleClass("is-detached", false);
       this.positionLabel(label, liveLink, renderer);
     });
   }
@@ -373,7 +373,7 @@ export class GraphOverlayController {
     }
 
     this.activeHoveredLabelId = hoveredLabel.id;
-    if (hoveredLabel.labelEl.classList.contains("is-hidden") || hoveredLabel.labelEl.style.display === "none") {
+    if (hoveredLabel.labelEl.classList.contains("is-hidden") || hoveredLabel.labelEl.classList.contains("is-detached")) {
       this.activeHoveredLabelId = null;
       this.hideHoverHighlight();
       return;
@@ -426,7 +426,6 @@ export class GraphOverlayController {
   }
 
   private destroyLabels(preserveTooltip = false): void {
-    const parent = this.currentHanger ?? this.currentStage;
     if (!preserveTooltip) {
       this.hideTooltip();
     }
@@ -770,12 +769,6 @@ export class GraphOverlayController {
   }
 
   private findRenderer(): InternalGraphRenderer | null {
-    const activeRenderer = this.getRendererFromLeaf(this.plugin.app.workspace.activeLeaf);
-    if (activeRenderer) {
-      this.preferredLeaf = this.plugin.app.workspace.activeLeaf;
-      return activeRenderer;
-    }
-
     const preferredRenderer = this.getRendererFromLeaf(this.preferredLeaf);
     if (preferredRenderer) {
       return preferredRenderer;
@@ -853,6 +846,10 @@ export class GraphOverlayController {
   }
 
   private getLeafGraphType(leaf: unknown): string | null {
+    if (!leaf) {
+      return null;
+    }
+
     const typedLeaf = leaf as { view?: { getViewType?: () => string } };
     const viewType = typedLeaf.view?.getViewType?.();
     return viewType && this.getEnabledLeafTypes().includes(viewType) ? viewType : null;
@@ -861,8 +858,8 @@ export class GraphOverlayController {
   private describeLeafState(): string {
     const graphLeaves = this.plugin.app.workspace.getLeavesOfType("graph").length;
     const localGraphLeaves = this.plugin.app.workspace.getLeavesOfType("localgraph").length;
-    const activeLeafType = (this.plugin.app.workspace.activeLeaf as { view?: { getViewType?: () => string } } | null)?.view?.getViewType?.() ?? "none";
-    return `activeLeaf=${activeLeafType}, graphLeaves=${graphLeaves}, localGraphLeaves=${localGraphLeaves}, preferredLeaf=${this.preferredLeaf ? "set" : "unset"}`;
+    const preferredLeafType = this.getLeafGraphType(this.preferredLeaf) ?? "none";
+    return `preferredLeaf=${preferredLeafType}, graphLeaves=${graphLeaves}, localGraphLeaves=${localGraphLeaves}, preferredLeafTracked=${this.preferredLeaf ? "set" : "unset"}`;
   }
 
   private isRenderer(renderer: unknown): renderer is InternalGraphRenderer {

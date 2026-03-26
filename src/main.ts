@@ -140,9 +140,9 @@ export default class GraphEdgeNotesPlugin extends Plugin {
       }
     });
 
-      this.addCommand({
-      id: "refresh-graph-edge-notes",
-      name: "Refresh graph edge notes overlay",
+    this.addCommand({
+      id: "refresh-overlay",
+      name: "Refresh edge labels overlay",
       callback: () => {
         this.refreshGraphOverlay("command refresh", true);
         new Notice("Graph edge notes refreshed");
@@ -325,16 +325,16 @@ export default class GraphEdgeNotesPlugin extends Plugin {
     const applyCollapsedState = (): void => {
       sectionEl.toggleClass("is-collapsed", this.settings.graphControlsCollapsed);
       collapseEl.toggleClass("is-collapsed", this.settings.graphControlsCollapsed);
-      bodyEl.style.display = this.settings.graphControlsCollapsed ? "none" : "";
+      bodyEl.toggleClass("is-hidden", this.settings.graphControlsCollapsed);
     };
     applyCollapsedState();
-    selfEl.addEventListener("click", async (event) => {
+    selfEl.addEventListener("click", (event) => {
       if (event.button !== 0) {
         return;
       }
       this.settings.graphControlsCollapsed = !this.settings.graphControlsCollapsed;
       applyCollapsedState();
-      await this.saveData(this.settings);
+      void this.saveData(this.settings);
     });
 
     new Setting(bodyEl)

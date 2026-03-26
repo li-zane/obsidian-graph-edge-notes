@@ -12,14 +12,14 @@ export class GraphEdgeNotesSettingTab extends PluginSettingTab {
     const i18n = t();
     containerEl.empty();
 
-    containerEl.createEl("h2", { text: i18n.settingsTitleData });
+    new Setting(containerEl).setName(i18n.settingsTitleData).setHeading();
 
     new Setting(containerEl)
       .setName(i18n.relationPropertyName)
       .setDesc(i18n.relationPropertyDesc)
       .addText((text) => {
         text
-          .setPlaceholder("relations")
+          .setPlaceholder("Relations")
           .setValue(this.plugin.settings.relationProperty)
           .onChange(async (value) => {
             this.plugin.settings.relationProperty = value.trim() || "relations";
@@ -28,7 +28,7 @@ export class GraphEdgeNotesSettingTab extends PluginSettingTab {
           });
       });
 
-    containerEl.createEl("h2", { text: i18n.settingsTitleFilter });
+    new Setting(containerEl).setName(i18n.settingsTitleFilter).setHeading();
 
     new Setting(containerEl)
       .setName(i18n.showInGlobalGraphName)
@@ -63,7 +63,7 @@ export class GraphEdgeNotesSettingTab extends PluginSettingTab {
         });
       });
 
-    containerEl.createEl("h2", { text: i18n.settingsTitleAppearance });
+    new Setting(containerEl).setName(i18n.settingsTitleAppearance).setHeading();
 
     new Setting(containerEl)
       .setName(i18n.showDetailOnHoverName)
@@ -120,7 +120,7 @@ export class GraphEdgeNotesSettingTab extends PluginSettingTab {
           });
       });
 
-    containerEl.createEl("h2", { text: i18n.settingsTitleAdvanced });
+    new Setting(containerEl).setName(i18n.settingsTitleAdvanced).setHeading();
 
     new Setting(containerEl)
       .setName(i18n.edgeRescanName)

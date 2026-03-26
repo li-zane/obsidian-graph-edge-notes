@@ -49,7 +49,7 @@ export class RelationEditorModal extends Modal {
       .setDesc("Short text shown directly on the graph edge.")
       .addText((text) => {
         this.labelInput = text;
-        text.setPlaceholder("gossip").setValue(this.labelValue).onChange((value) => {
+        text.setPlaceholder("Gossip").setValue(this.labelValue).onChange((value) => {
           this.labelValue = value;
         });
       });
